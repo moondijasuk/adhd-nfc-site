@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [step, setStep] = useState("start");
@@ -15,16 +16,16 @@ function App() {
   ];
 
   const cards = {
-    무기력: ["물 한 잔 마시기부터 시작해보자.", "자리에 앉아서 한 가지 정리만 해보자."],
-    불안: ["타이머 3분 맞추고 손 정리 해보자.", "불안을 줄이려면 작은 일부터 정리해보자."],
-    들뜸: ["하고 싶었던 걸 메모장에 정리해보자!", "스트레칭하고 다시 다이어리에 집중!"],
-    짜증: ["깊은 숨 한 번, 그리고 손 정리 3분.", "음악 들으며 책상 정리해보자."],
-    평온: ["이 기분 유지하며 작은 루틴 하나 해볼까?", "감사한 일 한 가지 적어보기"],
-    피곤: ["잠깐 누워서 5분 눈 감기.", "심호흡 3회와 물 한 컵!"],
+    "무기력": ["물 한 잔 마시기부터 시작해보자.", "자리에 앉아서 한 가지 정리만 해보자."],
+    "불안": ["타이머 3분 맞추고 손 정리 해보자.", "불안을 줄이려면 작은 일부터 정리해보자."],
+    "들뜸": ["하고 싶었던 걸 메모장에 정리해보자!", "스트레칭하고 다시 다이어리에 집중!"],
+    "짜증": ["깊은 숨 한 번, 그리고 손 정리 3분.", "음악 들으며 책상 정리해보자."],
+    "평온": ["이 기분 유지하며 작은 루틴 하나 해볼까?", "감사한 일 한 가지 적어보기"],
+    "피곤": ["잠깐 누워서 5분 눈 감기.", "심호흡 3회와 물 한 컵!"],
   };
 
-  const handleEmotionSelect = (label) => {
-    setEmotion(label);
+  const handleEmotionSelect = (e) => {
+    setEmotion(e);
     setStep("card");
   };
 
@@ -42,7 +43,7 @@ function App() {
             {emotions.map((e) => (
               <button
                 key={e.label}
-                className="bg-blue-200 hover:bg-blue-300 px-4 py-2 rounded"
+                className="bg-blue-100 hover:bg-blue-200 px-4 py-2 rounded"
                 onClick={() => handleEmotionSelect(e.label)}
               >
                 {e.emoji} {e.label}
@@ -52,9 +53,11 @@ function App() {
         </div>
       )}
 
-      {step === "card" && (
+      {step === "card" && emotion && (
         <div>
-          <h2 className="text-xl font-semibold mb-2">{emotion} 실행 카드</h2>
+          <h2 className="text-xl font-semibold mb-2">
+            {emotion} 상태에서 추천하는 실행 카드
+          </h2>
           <p className="mb-4">
             {cards[emotion][Math.floor(Math.random() * cards[emotion].length)]}
           </p>
